@@ -73,6 +73,46 @@ def management():
 
     return render_template('management.html', quotes = result, title="Management")
 
+@app.route('/add_quote')
+def add_quote():
+    # Redirect if not authenticated
+    if not session.get('username'):
+        return redirect(url_for('login'))
+
+    # Retrieve all categories
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM categories")
+    categories = cursor.fetchall()
+
+    # Convert the tuple to a list
+    categories_list = list(categories)
+
+    return render_template('add_quote.html', categories=categories_list, title="Add Quote")
+
+
+
+@app.route('/insert_quote', methods=['POST'])
+def insert_quote():
+    # Redirect if not authenticated
+    if not session.get('username'):
+        return redirect(url_for('login'))
+
+    # Retrieve quote data from the form
+    category_id = request.form.get('category')
+    content = request.form.get('content')
+    author = request.form.get('author')
+
+    # print("Received:", category_id, content, author)
+
+    # Insert the new quote into the database
+    cursor = mysql.connection.cursor()
+    cursor.execute("INSERT INTO quotes (category_id, content, author) VALUES (%s, %s, %s)", (category_id, content, author))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('management'))
+
+
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete(id):
@@ -93,12 +133,18 @@ def edit_quote(id):
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM quotes WHERE id=%s", (id,))
     quote = cursor.fetchone()
+
+    # Retrieve all categories
+    cursor.execute("SELECT * FROM categories")
+    categories = cursor.fetchall()
+
     cursor.close()
 
     if quote:
-        return render_template('edit_quote.html', quote=quote, title="Edit Quote")
+        return render_template('edit_quote.html', quote=quote, categories=categories, title="Edit Quote")
     else:
         return "Quote not found"
+
 
 @app.route('/update_quote/<int:id>', methods=['POST'])
 def update_quote(id):
@@ -107,12 +153,13 @@ def update_quote(id):
         return redirect(url_for('login'))
 
     # Retrieve updated quote data from the form
+    category_id = request.form.get('category') 
     content = request.form.get('content')
     author = request.form.get('author')
 
     # Update the quote in the database
     cursor = mysql.connection.cursor()
-    cursor.execute("UPDATE quotes SET content=%s, author=%s WHERE id=%s", (content, author, id))
+    cursor.execute("UPDATE quotes SET category_id=%s, content=%s, author=%s WHERE id=%s", (category_id, content, author, id))
     mysql.connection.commit()
     cursor.close()
 
