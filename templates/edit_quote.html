@@ -1,6 +1,8 @@
 {% include '/partials/header.html' %}
 
-<h1>Edit Quote</h1>
+<div class="py-3">
+  <h2>Edit Quote</h2>
+</div>
 
 <form action="{{ url_for('update_quote', id=quote[0]) }}" method="post">
   <div class="mb-3">

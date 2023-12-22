@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, g, request, session, redirect, url_for
 from flask_session import Session
 from flask_mysqldb import MySQL
 
@@ -173,7 +173,7 @@ def view_quote(id):
 
     # Retrieve the specific quote for viewing
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM quotes WHERE id=%s", (id,))
+    cursor.execute("SELECT quotes.*, categories.id, categories.name FROM quotes INNER JOIN categories on quotes.category_id = categories.id WHERE quotes.id=%s", (id,))
     quote = cursor.fetchone()
     cursor.close()
 

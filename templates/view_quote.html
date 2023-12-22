@@ -1,16 +1,37 @@
 {% include '/partials/header.html' %}
 
-<h1>View Quote</h1>
+<div class="py-3">
+  <h2>View Quote</h2>
+</div>
 
-<div class="mb-3"><strong>ID:</strong> {{ quote[0] }}</div>
-<div class="mb-3"><strong>Category:</strong> {{ quote[7] }}</div>
-<div class="mb-3"><strong>Content:</strong> {{ quote[2] }}</div>
-<div class="mb-3"><strong>Author:</strong> {{ quote[3] }}</div>
-<div class="mb-3"><strong>Created:</strong> {{ quote[4] }}</div>
-<div class="mb-3"><strong>Last Modified:</strong> {{ quote[5] }}</div>
+  <div class="container">
+    <div class="row d-flex align-items-center g-4">
+      <div class="col-md-12 col-xl-6">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+            <i class="fas fa-quote-left fa-2x mb-4"></i>
+            <p class="lead">{{ quote[2] }}</p>
 
-<a href="{{ url_for('management') }}" class="btn btn-secondary"
-  >Back to Management</a
->
+            <hr>
+
+            <div class="d-flex justify-content-between">
+              <p class="mb-0"> - {{ quote[3] }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-12 col-xl-6">
+        <div class="mb-3"><strong>Category:</strong> {{ quote[7] }}</div>
+        <div class="mb-3"><strong>Created:</strong> {{ quote[4] }}</div>
+        <div class="mb-3"><strong>Last Modified:</strong> {{ quote[5] }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="py-5">
+  <a href="{{ url_for('management') }}" class="btn btn-primary">Back to Management</a>
+</div>
+
 
 {% include '/partials/footer.html' %}

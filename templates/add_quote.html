@@ -1,8 +1,10 @@
 {% include '/partials/header.html' %}
 
-<h1>Add Quote</h1>
+<div class="py-3">
+  <h2>Add Quote</h2>
+</div>
 
-<form action="{{ url_for('insert_quote') }}" method="post">
+<form action="{{ url_for('insert_quote') }}" method="post" class="col-lg-6">
   <div class="mb-3">
     <label for="category">Category</label>
     <select class="form-select" id="category" name="category" required>
@@ -17,7 +19,9 @@
       class="form-control"
       id="content"
       name="content"
+      rows="5"
       required
+      style="resize: none"
     ></textarea>
   </div>
   <div class="mb-3">
@@ -30,7 +34,7 @@
       required
     />
   </div>
-  <button type="submit" class="btn btn-success">Add Quote</button>
+  <button type="submit" class="btn btn-primary">Add Quote</button>
 </form>
 
 {% include '/partials/footer.html' %}
