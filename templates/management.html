@@ -1,7 +1,9 @@
 {% include '/partials/header.html' %}
 
 <h1>Management</h1>
-
+<div class="mb-3">
+  <a href="{{ url_for('add_quote') }}" class="btn btn-success">Add Quote</a>
+</div>
 <table id="quote-table">
   <thead>
     <tr>
@@ -15,33 +17,47 @@
     </tr>
   </thead>
   <tbody>
-      {% for quote in quotes %}
-        <tr>
-          <td>{{quote[0]}}</td>
-          <td>{{quote[7]}}</td>
-          <td>{{quote[2]}}</td>
-          <td>{{quote[3]}}</td>
-          <td>{{quote[4]}}</td>
-          <td>{{quote[5]}}</td>
-          <td class="d-flex gap-2">
-            <form action="" method="post">
-              <button data-mdb-ripple-init type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-            <div>
-              <a data-mdb-ripple-init class="btn btn-primary btn-sm" href="" role="button">Edit</a>
-            </div>
-          </td>
-        </tr>
-      {% endfor %}
+    {% for quote in quotes %}
+    <tr>
+      <td>{{quote[0]}}</td>
+      <td>{{quote[7]}}</td>
+      <td>{{quote[2]}}</td>
+      <td>{{quote[3]}}</td>
+      <td>{{quote[4]}}</td>
+      <td>{{quote[5]}}</td>
+      <td class="d-flex gap-2">
+        <form action="{{ url_for('delete', id=quote[0]) }}" method="post">
+          <button
+            data-mdb-ripple-init
+            type="submit"
+            class="btn btn-danger btn-sm"
+          >
+            Delete
+          </button>
+        </form>
+        <div>
+          <a
+            data-mdb-ripple-init
+            class="btn btn-primary btn-sm"
+            href="{{ url_for('edit_quote', id=quote[0]) }}"
+            role="button"
+            >Edit</a
+          >
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
   </tbody>
 </table>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css"
+/>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script>
-  $(function() {
+  $(function () {
     let table = new DataTable($("#quote-table"));
-    
   });
 </script>
 
