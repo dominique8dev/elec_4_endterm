@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Management</title>
-  </head>
-  <body>
-    <h1>Management</h1>
-  </body>
-</html>
+{% include '/partials/header.html' %}
+
+<h1>Management</h1>
+
+<table id="quote-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Category</th>
+      <th>Content</th>
+      <th>Author</th>
+      <th>Created</th>
+      <th>Last Modified</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for quote in quotes %}
+        <tr>
+          <td>{{quote[0]}}</td>
+          <td>{{quote[7]}}</td>
+          <td>{{quote[2]}}</td>
+          <td>{{quote[3]}}</td>
+          <td>{{quote[4]}}</td>
+          <td>{{quote[5]}}</td>
+          <td class="d-flex gap-2">
+            <form action="" method="post">
+              <button data-mdb-ripple-init type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+            <div>
+              <a data-mdb-ripple-init class="btn btn-primary btn-sm" href="" role="button">Edit</a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script>
+  $(function() {
+    let table = new DataTable($("#quote-table"));
+    
+  });
+</script>
+
+{% include '/partials/footer.html' %}

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <div class="container">
+        <a class="navbar-brand me-2" href="/">
+            <h3 class="mb-0">Quote Management System</h3>
+        </a>
+
+        <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarButtonsExample">  
+        <div class="d-flex align-items-center">
+            <div>
+                <a data-mdb-ripple-init class="btn btn-link" href="/home" role="button">Home</a>
+            </div>
+            <div>
+                <a data-mdb-ripple-init class="btn btn-link" href="/management" role="button">Management</a>
+            </div>
+
+            <form action="/logout" method="post">
+                <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
+                    Logout
+                </button>
+            </form>
+        </div>
+      </div>
+    </div>
+</nav>

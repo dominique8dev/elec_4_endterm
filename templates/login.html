@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <!-- You can include Bootstrap or any other CSS stylesheets here -->
-  </head>
-  <body>
+{% include '/partials/header.html' %}
     <h2>Login</h2>
     {% if error %}
     <p style="color: red">{{ error }}</p>
@@ -18,5 +10,4 @@
       <input type="password" id="password" name="password" /><br />
       <button type="submit">Login</button>
     </form>
-  </body>
-</html>
+{% include '/partials/footer.html' %}

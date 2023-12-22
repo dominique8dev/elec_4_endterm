@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <!-- You can include Bootstrap or any other CSS stylesheets here -->
-  </head>
-  <body>
-    <h1>Home</h1>
-  </body>
-</html>
+{% include '/partials/header.html' %}
+  <h1>Home | QMS {{session}}</h1>
+  <button type="button" class="btn btn-primary">This is a button</button>
+{% include '/partials/footer.html' %}
