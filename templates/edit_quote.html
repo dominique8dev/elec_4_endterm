@@ -1,0 +1,17 @@
+{% include '/partials/header.html' %}
+
+<h1>Edit Quote</h1>
+
+<form action="{{ url_for('update_quote', id=quote[0]) }}" method="post">
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" id="content" name="content" rows="3" required>{{ quote[2] }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <input type="text" class="form-control" id="author" name="author" value="{{ quote[3] }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Update Quote</button>
+</form>
+
+{% include '/partials/footer.html' %}

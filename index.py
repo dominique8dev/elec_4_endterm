@@ -73,6 +73,52 @@ def management():
 
     return render_template('management.html', quotes = result, title="Management")
 
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("DELETE FROM quotes WHERE id=%s", (id,))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect('/management')
+
+@app.route('/edit_quote/<int:id>')
+def edit_quote(id):
+    # Redirect if not authenticated
+    if not session.get('username'):
+        return redirect(url_for('login'))
+
+    # Retrieve the quote for editing
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM quotes WHERE id=%s", (id,))
+    quote = cursor.fetchone()
+    cursor.close()
+
+    if quote:
+        return render_template('edit_quote.html', quote=quote, title="Edit Quote")
+    else:
+        return "Quote not found"
+
+@app.route('/update_quote/<int:id>', methods=['POST'])
+def update_quote(id):
+    # Redirect if not authenticated
+    if not session.get('username'):
+        return redirect(url_for('login'))
+
+    # Retrieve updated quote data from the form
+    content = request.form.get('content')
+    author = request.form.get('author')
+
+    # Update the quote in the database
+    cursor = mysql.connection.cursor()
+    cursor.execute("UPDATE quotes SET content=%s, author=%s WHERE id=%s", (content, author, id))
+    mysql.connection.commit()
+    cursor.close()
+
+    return redirect(url_for('management'))
+
+
 @app.route('/logout', methods=['POST'])
 def logout():
     session['username'] = None
