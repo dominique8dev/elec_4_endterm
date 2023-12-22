@@ -1,0 +1,16 @@
+{% include '/partials/header.html' %}
+
+<h1>View Quote</h1>
+
+<div class="mb-3"><strong>ID:</strong> {{ quote[0] }}</div>
+<div class="mb-3"><strong>Category:</strong> {{ quote[7] }}</div>
+<div class="mb-3"><strong>Content:</strong> {{ quote[2] }}</div>
+<div class="mb-3"><strong>Author:</strong> {{ quote[3] }}</div>
+<div class="mb-3"><strong>Created:</strong> {{ quote[4] }}</div>
+<div class="mb-3"><strong>Last Modified:</strong> {{ quote[5] }}</div>
+
+<a href="{{ url_for('management') }}" class="btn btn-secondary"
+  >Back to Management</a
+>
+
+{% include '/partials/footer.html' %}

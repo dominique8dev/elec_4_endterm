@@ -44,6 +44,16 @@
             >Edit</a
           >
         </div>
+        <div>
+          <a
+            data-mdb-ripple-init
+            class="btn btn-info btn-sm"
+            href="{{ url_for('view_quote', id=quote[0]) }}"
+            role="button"
+          >
+            View
+          </a>
+        </div>
       </td>
     </tr>
     {% endfor %}

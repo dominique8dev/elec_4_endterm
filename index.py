@@ -165,6 +165,22 @@ def update_quote(id):
 
     return redirect(url_for('management'))
 
+@app.route('/view_quote/<int:id>')
+def view_quote(id):
+    # Redirect if not authenticated
+    if not session.get('username'):
+        return redirect(url_for('login'))
+
+    # Retrieve the specific quote for viewing
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM quotes WHERE id=%s", (id,))
+    quote = cursor.fetchone()
+    cursor.close()
+
+    if quote:
+        return render_template('view_quote.html', quote=quote, title="View Quote")
+    else:
+        return "Quote not found"
 
 @app.route('/logout', methods=['POST'])
 def logout():
